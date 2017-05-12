@@ -343,9 +343,6 @@ public class AppUpdater implements IAppUpdater {
                                 alertDialog = UtilsDisplay.showUpdateAvailableDialog(context, titleUpdate, getDescriptionUpdate(context, update, Display.DIALOG), btnDismiss, btnUpdate, btnDisable, updateClickListener, btnDismissClickListener, disableClickListener);
                                 setupDialog();
                                 alertDialog.show();
-                                if (onShowListener != null) {
-                                    onShowListener.didShow();
-                                }
                                 break;
                             case SNACKBAR:
                                 snackbar = UtilsDisplay.showUpdateAvailableSnackbar(context, getDescriptionUpdate(context, update, Display.SNACKBAR), UtilsLibrary.getDurationEnumToBoolean(duration), updateFrom, update.getUrlToDownload());
@@ -363,9 +360,6 @@ public class AppUpdater implements IAppUpdater {
                             alertDialog = UtilsDisplay.showUpdateNotAvailableDialog(context, titleNoUpdate, getDescriptionNoUpdate(context));
                             setupDialog();
                             alertDialog.show();
-                            if (onShowListener != null) {
-                                onShowListener.didShow();
-                            }
                             break;
                         case SNACKBAR:
                             snackbar = UtilsDisplay.showUpdateNotAvailableSnackbar(context, getDescriptionNoUpdate(context), UtilsLibrary.getDurationEnumToBoolean(duration));
@@ -460,6 +454,16 @@ public class AppUpdater implements IAppUpdater {
 
     private void setupDialog() {
         alertDialog.setCancelable(isCancelable);
+        
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                if (onShowListener != null) {
+                    onShowListener.didShow();
+                }
+            }
+        });
+
         if (dialogType > 0) {
             try {
                 alertDialog.getWindow().setType(dialogType);
