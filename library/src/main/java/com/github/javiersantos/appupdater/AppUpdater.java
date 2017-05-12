@@ -18,11 +18,11 @@ import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.github.javiersantos.appupdater.objects.GitHub;
 import com.github.javiersantos.appupdater.objects.Update;
 
-public class AppUpdater implements IAppUpdater {
+interface OnShowListener {
+    void didShow();
+}
 
-    interface OnShowListener {
-        void didShow();
-    }
+public class AppUpdater implements IAppUpdater {
 
     private Context context;
     private LibraryPreferences libraryPreferences;
