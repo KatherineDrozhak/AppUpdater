@@ -38,6 +38,7 @@ public class AppUpdater implements IAppUpdater {
     private Snackbar snackbar;
 
     private boolean isCancelable = true;
+    private int dialogType;
 
     public AppUpdater(Context context) {
         this.context = context;
@@ -337,7 +338,7 @@ public class AppUpdater implements IAppUpdater {
                                 final DialogInterface.OnClickListener disableClickListener = btnDisableClickListener == null ? new DisableClickListener(context) : btnDisableClickListener;
 
                                 alertDialog = UtilsDisplay.showUpdateAvailableDialog(context, titleUpdate, getDescriptionUpdate(context, update, Display.DIALOG), btnDismiss, btnUpdate, btnDisable, updateClickListener, btnDismissClickListener, disableClickListener);
-                                alertDialog.setCancelable(isCancelable);
+                                setupDialog();
                                 alertDialog.show();
                                 break;
                             case SNACKBAR:
@@ -354,7 +355,7 @@ public class AppUpdater implements IAppUpdater {
                     switch (display) {
                         case DIALOG:
                             alertDialog = UtilsDisplay.showUpdateNotAvailableDialog(context, titleNoUpdate, getDescriptionNoUpdate(context));
-                            alertDialog.setCancelable(isCancelable);
+                            setupDialog();
                             alertDialog.show();
                             break;
                         case SNACKBAR:
@@ -438,5 +439,20 @@ public class AppUpdater implements IAppUpdater {
 
     public void setCancelable(boolean isCancelable) {
         this.isCancelable = isCancelable;
+    }
+
+    public void setDialogType(int type) {
+        this.dialogType = type;
+    }
+
+    private void setupDialog() {
+        alertDialog.setCancelable(isCancelable);
+        if (dialogType > 0) {
+            try {
+                alertDialog.getWindow().setType(dialogType);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
