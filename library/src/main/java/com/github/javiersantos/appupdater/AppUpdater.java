@@ -429,6 +429,10 @@ public class AppUpdater implements IAppUpdater {
         } else {
             return descriptionNoUpdate;
         }
+
     }
 
+    public void setCancelable(boolean isCancelable) {
+        alertDialog.setCancelable(isCancelable);
+    }
 }
