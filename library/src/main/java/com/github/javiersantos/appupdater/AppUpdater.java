@@ -37,6 +37,8 @@ public class AppUpdater implements IAppUpdater {
     private AlertDialog alertDialog;
     private Snackbar snackbar;
 
+    private boolean isCancelable = true;
+
     public AppUpdater(Context context) {
         this.context = context;
         this.libraryPreferences = new LibraryPreferences(context);
@@ -335,6 +337,7 @@ public class AppUpdater implements IAppUpdater {
                                 final DialogInterface.OnClickListener disableClickListener = btnDisableClickListener == null ? new DisableClickListener(context) : btnDisableClickListener;
 
                                 alertDialog = UtilsDisplay.showUpdateAvailableDialog(context, titleUpdate, getDescriptionUpdate(context, update, Display.DIALOG), btnDismiss, btnUpdate, btnDisable, updateClickListener, btnDismissClickListener, disableClickListener);
+                                alertDialog.setCancelable(isCancelable);
                                 alertDialog.show();
                                 break;
                             case SNACKBAR:
@@ -351,6 +354,7 @@ public class AppUpdater implements IAppUpdater {
                     switch (display) {
                         case DIALOG:
                             alertDialog = UtilsDisplay.showUpdateNotAvailableDialog(context, titleNoUpdate, getDescriptionNoUpdate(context));
+                            alertDialog.setCancelable(isCancelable);
                             alertDialog.show();
                             break;
                         case SNACKBAR:
@@ -433,6 +437,6 @@ public class AppUpdater implements IAppUpdater {
     }
 
     public void setCancelable(boolean isCancelable) {
-        alertDialog.setCancelable(isCancelable);
+        this.isCancelable = isCancelable;
     }
 }
