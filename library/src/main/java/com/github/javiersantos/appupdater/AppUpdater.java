@@ -18,9 +18,6 @@ import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.github.javiersantos.appupdater.objects.GitHub;
 import com.github.javiersantos.appupdater.objects.Update;
 
-interface OnShowListener {
-    void didShow();
-}
 
 public class AppUpdater implements IAppUpdater {
 
