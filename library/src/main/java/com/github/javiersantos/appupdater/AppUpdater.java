@@ -19,6 +19,11 @@ import com.github.javiersantos.appupdater.objects.GitHub;
 import com.github.javiersantos.appupdater.objects.Update;
 
 public class AppUpdater implements IAppUpdater {
+
+    interface OnShowListener {
+        void didShow();
+    }
+
     private Context context;
     private LibraryPreferences libraryPreferences;
     private Display display;
@@ -39,6 +44,7 @@ public class AppUpdater implements IAppUpdater {
 
     private boolean isCancelable = true;
     private int dialogType;
+    private OnShowListener onShowListener;
 
     public AppUpdater(Context context) {
         this.context = context;
@@ -340,6 +346,9 @@ public class AppUpdater implements IAppUpdater {
                                 alertDialog = UtilsDisplay.showUpdateAvailableDialog(context, titleUpdate, getDescriptionUpdate(context, update, Display.DIALOG), btnDismiss, btnUpdate, btnDisable, updateClickListener, btnDismissClickListener, disableClickListener);
                                 setupDialog();
                                 alertDialog.show();
+                                if (onShowListener != null) {
+                                    onShowListener.didShow();
+                                }
                                 break;
                             case SNACKBAR:
                                 snackbar = UtilsDisplay.showUpdateAvailableSnackbar(context, getDescriptionUpdate(context, update, Display.SNACKBAR), UtilsLibrary.getDurationEnumToBoolean(duration), updateFrom, update.getUrlToDownload());
@@ -357,6 +366,9 @@ public class AppUpdater implements IAppUpdater {
                             alertDialog = UtilsDisplay.showUpdateNotAvailableDialog(context, titleNoUpdate, getDescriptionNoUpdate(context));
                             setupDialog();
                             alertDialog.show();
+                            if (onShowListener != null) {
+                                onShowListener.didShow();
+                            }
                             break;
                         case SNACKBAR:
                             snackbar = UtilsDisplay.showUpdateNotAvailableSnackbar(context, getDescriptionNoUpdate(context), UtilsLibrary.getDurationEnumToBoolean(duration));
@@ -443,6 +455,10 @@ public class AppUpdater implements IAppUpdater {
 
     public void setDialogType(int type) {
         this.dialogType = type;
+    }
+
+    public void setOnShowListener(OnShowListener onShowListener) {
+        this.onShowListener = onShowListener;
     }
 
     private void setupDialog() {
