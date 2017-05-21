@@ -7,9 +7,11 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Button;
 
 import com.github.javiersantos.appupdater.enums.AppUpdaterError;
 import com.github.javiersantos.appupdater.enums.Display;
@@ -471,5 +473,24 @@ public class AppUpdater implements IAppUpdater {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void setButtonColor(final Context context, final int colorRes){
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                positiveButton.setTextColor(ContextCompat.getColor(context, colorRes));
+                positiveButton.invalidate();
+
+                Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                negativeButton.setTextColor(ContextCompat.getColor(context, colorRes));
+                negativeButton.invalidate();
+
+                Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+                neutralButton.setTextColor(ContextCompat.getColor(context, colorRes));
+                neutralButton.invalidate();
+            }
+        });
     }
 }
