@@ -457,7 +457,7 @@ public class AppUpdater implements IAppUpdater {
 
     private void setupDialog() {
         alertDialog.setCancelable(isCancelable);
-        
+
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -476,30 +476,26 @@ public class AppUpdater implements IAppUpdater {
         }
 
         if (colorRes > 0) {
-                setUpButtonColor(colorRes);
+            setUpButtonColor(colorRes);
         }
     }
 
-    private void setUpButtonColor(final int colorRes){
-        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                positiveButton.setTextColor(ContextCompat.getColor(context, colorRes));
-                positiveButton.invalidate();
+    private void setUpButtonColor(final int colorRes) {
+        Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        positiveButton.setTextColor(ContextCompat.getColor(context, colorRes));
+        positiveButton.invalidate();
 
-                Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-                negativeButton.setTextColor(ContextCompat.getColor(context, colorRes));
-                negativeButton.invalidate();
+        Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        negativeButton.setTextColor(ContextCompat.getColor(context, colorRes));
+        negativeButton.invalidate();
 
-                Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
-                neutralButton.setTextColor(ContextCompat.getColor(context, colorRes));
-                neutralButton.invalidate();
-            }
-        });
+        Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+        neutralButton.setTextColor(ContextCompat.getColor(context, colorRes));
+        neutralButton.invalidate();
+
     }
 
-    public void setButtonsColor(final int colorRes){
+    public void setButtonsColor(final int colorRes) {
         this.colorRes = colorRes;
     }
 }
