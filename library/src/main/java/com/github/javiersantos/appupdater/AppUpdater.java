@@ -43,6 +43,7 @@ public class AppUpdater implements IAppUpdater {
 
     private boolean isCancelable = true;
     private int dialogType;
+    private int colorRes = -1;
     private OnShowListener onShowListener;
 
     public AppUpdater(Context context) {
@@ -473,9 +474,13 @@ public class AppUpdater implements IAppUpdater {
                 e.printStackTrace();
             }
         }
+
+        if (colorRes > 0) {
+                setUpButtonColor(colorRes);
+        }
     }
 
-    public void setButtonColor(final Context context, final int colorRes){
+    private void setUpButtonColor(final int colorRes){
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -492,5 +497,9 @@ public class AppUpdater implements IAppUpdater {
                 neutralButton.invalidate();
             }
         });
+    }
+
+    public void setButtonsColor(final int colorRes){
+        this.colorRes = colorRes;
     }
 }
