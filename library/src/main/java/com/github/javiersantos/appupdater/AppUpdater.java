@@ -482,16 +482,25 @@ public class AppUpdater implements IAppUpdater {
 
     private void setUpButtonColor(final int colorRes) {
         Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        positiveButton.setTextColor(ContextCompat.getColor(context, colorRes));
-        positiveButton.invalidate();
+        if (positiveButton != null) {
+
+            positiveButton.setTextColor(ContextCompat.getColor(context, colorRes));
+            positiveButton.invalidate();
+        }
 
         Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-        negativeButton.setTextColor(ContextCompat.getColor(context, colorRes));
-        negativeButton.invalidate();
+        if (negativeButton != null) {
+
+            negativeButton.setTextColor(ContextCompat.getColor(context, colorRes));
+            negativeButton.invalidate();
+        }
 
         Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
-        neutralButton.setTextColor(ContextCompat.getColor(context, colorRes));
-        neutralButton.invalidate();
+        if (neutralButton != null) {
+
+            neutralButton.setTextColor(ContextCompat.getColor(context, colorRes));
+            neutralButton.invalidate();
+        }
 
     }
 
