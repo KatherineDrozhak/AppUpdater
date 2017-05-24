@@ -37,14 +37,14 @@ public class MainActivity extends AppCompatActivity {
         binding.included.dialogUpdateChangelog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AppUpdater(context)
+                AppUpdater updater = new AppUpdater(context)
                         //.setUpdateFrom(UpdateFrom.GITHUB)
                         //.setGitHubUserAndRepo("javiersantos", "AppUpdater")
                         .setUpdateFrom(UpdateFrom.JSON)
                         .setUpdateJSON("https://raw.githubusercontent.com/javiersantos/AppUpdater/master/app/update-changelog.json")
                         .setDisplay(Display.DIALOG)
-                        .showAppUpdated(true)
-                        .start();
+                        .showAppUpdated(true);
+                updater.start();
             }
         });
 

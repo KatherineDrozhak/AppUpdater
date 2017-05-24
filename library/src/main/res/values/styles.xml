@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">#3977DB</item>
+    </style>
+
+</resources>
